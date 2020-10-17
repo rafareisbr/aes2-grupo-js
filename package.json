@@ -1,7 +1,7 @@
 {
     "name": "aes2-grupo-js",
     "version": "1.0.0",
-    "description": "Crie  um grupo de até 10 pessoas e desenvolvam um algoritmo de remoção em árvores Rubro-Negras. Posteriormente, grave um vídeo com seu grupo apresentando o algoritmo em cada caso.",
+    "description": "Crie um grupo de até 10 pessoas e desenvolvam um algoritmo de remoção em árvores Rubro-Negras. Posteriormente, grave um vídeo com seu grupo apresentando o algoritmo em cada caso.",
     "main": "index.js",
     "scripts": {
         "start": "node src/index.js",
