@@ -21,7 +21,10 @@ O grupo com melhor código e apresentação ganhará 2 pontos bônus na prova P1
 
 - Atributos da Árvore
 - Atributos do Nó
-- Implementar método Árvore.inserir(chave: int): void
+- Impl. método Árvore.inserir(chave: int): void
     * Detalhar
-- Implementar método Arvore.remover(chave : int): void
+- Impl. método Arvore.remover(chave : int): void
     * Detalhar
+ 
+- Impl. giro simples a esquerda
+- Impl. giro simples a direita
