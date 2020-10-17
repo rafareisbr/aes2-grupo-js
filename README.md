@@ -16,3 +16,12 @@ O grupo com melhor código e apresentação ganhará 2 pontos bônus na prova P1
 2. Rode `npm install` dentro desta pasta para instalar as dependências.
 3. Rode `npm start` e a aplicação iniciará.
 4. Todo o código está dentro da pasta 'src' - ignorar o resto.
+
+### Atividades
+
+- Atributos da Árvore
+- Atributos do Nó
+- Inserir Nó em Árvore.inserir(chave: int): void
+    * Detalhar
+- Implementar método Arvore.remover(chave : int): void
+    * Detalhar
