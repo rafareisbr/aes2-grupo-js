@@ -1,6 +1,7 @@
-class Arvore {
+export default class Arvore {
     raiz = null;
-    constructor(params) {}
+
+    constructor() {}
 
     inserir() {}
 
@@ -8,5 +9,3 @@ class Arvore {
 
     exibir() {}
 }
-
-module.exports = Arvore;

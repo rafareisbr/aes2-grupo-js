@@ -1,11 +1,9 @@
-class No {
+export default class No {
     esquerda = null;
     direita = null;
     chave = null;
 
-    constructor(chave) {
+    constructor(chave: number) {
         this.chave = chave;
     }
 }
-
-module.exports = No;

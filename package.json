@@ -4,7 +4,7 @@
     "description": "Crie um grupo de até 10 pessoas e desenvolvam um algoritmo de remoção em árvores Rubro-Negras. Posteriormente, grave um vídeo com seu grupo apresentando o algoritmo em cada caso.",
     "main": "index.js",
     "scripts": {
-        "start": "node src/index.js",
+        "start": "nodemon ./src/index.ts",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
@@ -18,5 +18,8 @@
         "url": "https://github.com/rafareisbr/aes2-grupo-js/issues"
     },
     "homepage": "https://github.com/rafareisbr/aes2-grupo-js#readme",
-    "devDependencies": {}
+    "devDependencies": {
+        "nodemon": "^2.0.6",
+        "sucrase": "^3.16.0"
+    }
 }
