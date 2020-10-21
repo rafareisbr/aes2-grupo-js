@@ -10,12 +10,15 @@ PS: a árvore deve ser implementada completamente, não devem utilizar bibliotec
 
 O grupo com melhor código e apresentação ganhará 2 pontos bônus na prova P1 (Não passa de 10 na prova)
 
-### Como rodar
+### Como rodar (recomendado o uso do vscode)
 
 1. Instale o NodeJs na sua máquina.
 2. Rode `npm install` dentro desta pasta para instalar as dependências.
 3. Rode `npm start` e a aplicação iniciará.
 4. Todo o código está dentro da pasta 'src' - ignorar o resto.
+
+No vscode, recomendamos a instalação da extensão: [Editor Config](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
+No Webstorm também existe essa extensão e em vários outros editores.
 
 ### Atividades
 
