@@ -19,6 +19,15 @@ export default class Arvore {
         return aux;
     }
 
+    private rotacaoDireita(raiz: No): No {
+        let aux = raiz.esquerda;
+        raiz.esquerda = aux.direita;
+        aux.direita = raiz;
+        aux.cor = raiz.cor;
+        aux.direita.cor = Cor.Vermelho;
+        return aux;
+    }
+
     remover() {}
 
     exibir() {}
