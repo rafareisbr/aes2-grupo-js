@@ -12,4 +12,13 @@ export default class No {
         this.direita = null;
         this.cor = Cor.Vermelho;
     }
+    
+    inverteCor():void {
+        if(this.chave === null)
+            return;
+        if(this.cor === Cor.Vermelho)
+            this.cor = Cor.Preto;
+        else
+            this.cor = Cor.Vermelho
+    }
 }
