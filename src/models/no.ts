@@ -1,9 +1,11 @@
 export default class No {
-    esquerda = null;
-    direita = null;
-    chave = null;
+    esquerda: No;
+    direita: No;
+    chave: number;
 
     constructor(chave: number) {
         this.chave = chave;
+        this.esquerda = null;
+        this.direita = null;
     }
 }

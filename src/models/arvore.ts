@@ -1,7 +1,11 @@
-export default class Arvore {
-    raiz = null;
+import No from "./no";
 
-    constructor() {}
+export default class Arvore {
+    raiz: No;
+
+    constructor() {
+        this.raiz = null;
+    }
 
     inserir() {}
 
