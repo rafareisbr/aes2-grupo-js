@@ -35,10 +35,55 @@ export default class Arvore {
         if(node.pai.pai === null)
             return;
 
-        //this.fix(node);
+        this.fix(node);
     }
 
-   
+    fix(node: No) {
+        let u: No;
+        while(node.pai.cor === Cor.Vermelho){
+            if(node.pai === node.pai.pai.direita){
+                u = node.pai.pai.esquerda;
+                if(u === null)
+                    u = new No(null, null, Cor.Preto)
+                if(u.cor === Cor.Vermelho){
+                    u.cor = Cor.Preto;
+                    node.pai.cor = Cor.Preto;
+                    node.pai.pai.cor = Cor.Vermelho
+                    node = node.pai.pai;
+                } else {
+                    if( node === node.pai.esquerda) {
+                        node = node.pai;
+                        this.rotacaoDireita(node);
+                    }
+                    node.pai.cor = Cor.Preto;
+                    node.pai.pai.cor = Cor.Vermelho;
+                    this.rotacaoEsquerda(node.pai.pai);
+                }
+            } else {
+                u = node.pai.pai.direita;
+                if(u === null)
+                    u = new No(null, null, Cor.Preto)
+                if(u.cor === Cor.Vermelho) {
+                    u.cor = Cor.Preto;
+                    node.pai.cor = Cor.Preto;
+                    node.pai.pai.cor = Cor.Vermelho;
+                    node = node.pai.pai;
+                } else {
+                    if(node === node.pai.direita) {
+                        node = node.pai;
+                        this.rotacaoEsquerda(node);
+                    }
+                    node.pai.cor = Cor.Preto;
+                    node.pai.pai.cor = Cor.Vermelho;
+                    this.rotacaoDireita(node.pai.pai);
+                }
+            }
+            if(node === this.raiz){
+                break;
+            }
+        }
+        this.raiz.cor = Cor.Preto;
+    }
 
     private rotacaoEsquerda(node: No){
         console.log(`Rotação esquerda`);
