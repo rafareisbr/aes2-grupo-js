@@ -40,24 +40,40 @@ export default class Arvore {
 
    
 
-    private rotacaoEsquerda(raiz: No): No {
-        console.log('Rotação esquerda');
-        let aux = raiz.direita;
-        raiz.direita = aux.esquerda;
-        aux.esquerda = raiz;
-        aux.cor = raiz.cor;
-        raiz.cor = Cor.Vermelho;
-        return aux;
+    private rotacaoEsquerda(node: No){
+        console.log(`Rotação esquerda`);
+        let auxiliar = node.direita;
+        node.direita = auxiliar.esquerda;
+        if(auxiliar.esquerda !== null)
+            auxiliar.esquerda.pai = node;
+        auxiliar.pai = node.pai;
+        if(node.pai === null)
+            this.raiz = auxiliar;
+        else if (node === node.pai.esquerda)
+            node.pai.esquerda = auxiliar;
+        else
+            node.pai.direita = auxiliar;
+        
+        auxiliar.esquerda = node;
+        node.pai = auxiliar;
     }
 
-    private rotacaoDireita(raiz: No): No {
+    private rotacaoDireita(node: No){
         console.log('Rotação direita');
-        let aux = raiz.esquerda;
-        raiz.esquerda = aux.direita;
-        aux.direita = raiz;
-        aux.cor = raiz.cor;
-        raiz.cor  = Cor.Vermelho;
-        return aux;
+        let auxiliar = node.esquerda;
+        node.esquerda = auxiliar.direita;
+        if(auxiliar.direita !== null)
+            auxiliar.direita.pai = node;
+        auxiliar.pai = node.pai;
+        if(node.pai === null)
+            this.raiz = auxiliar;
+        else if (node === node.pai.direita)
+            node.pai.direita = auxiliar;
+        else
+            node.pai.esquerda = auxiliar;
+        
+        auxiliar.direita = node;
+        node.pai = auxiliar;
     }
 
     remover() { }
