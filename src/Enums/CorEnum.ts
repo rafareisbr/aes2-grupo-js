@@ -1,4 +1,4 @@
 export enum Cor {
-    Preto,
-    Vermelho
+    Preto = 'Preto',
+    Vermelho = 'Vermelho'
 };
