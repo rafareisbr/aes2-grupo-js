@@ -127,7 +127,7 @@ export default class Arvore {
     remover(chave: number) {
         let suporte = new Suporte();     
            
-        suporte.remove(chave);
+        suporte.remove(this.raiz, chave);
 
      }
 

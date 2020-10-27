@@ -52,7 +52,7 @@ export default class Suporte {
         return ((node.esquerda && node.esquerda.cor === Cor.Vermelho) || (node.direita && node.direita.cor === Cor.Vermelho))
     }
 
-    remove(chave: number){
+    remove(raiz: No, chave: number){
         let node = new No(chave)
 
 
@@ -60,7 +60,7 @@ export default class Suporte {
             return
         }
 
-        this.removeBS(node, node)
+        this.removeBS(raiz, node)
     }
 
     removeBS(raiz: No, node: No) {
