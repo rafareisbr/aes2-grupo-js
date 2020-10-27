@@ -7,7 +7,7 @@ export default class No {
     cor: Cor;
     pai: No;
 
-    constructor(chave: number, pai: No, cor = Cor.Vermelho) {
+    constructor(chave: number, pai?: No, cor = Cor.Vermelho) {
         this.chave = chave;
         this.esquerda = null;
         this.direita = null;

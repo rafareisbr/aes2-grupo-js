@@ -1,5 +1,6 @@
 import No from "./no";
 import { Cor } from '../Enums/CorEnum';
+import Suporte from "./suporte";
 
 export default class Arvore {
     raiz: No;
@@ -85,7 +86,7 @@ export default class Arvore {
         this.raiz.cor = Cor.Preto;
     }
 
-    private rotacaoEsquerda(node: No){
+   rotacaoEsquerda(node: No){
         console.log(`Rotação esquerda`);
         let auxiliar = node.direita;
         node.direita = auxiliar.esquerda;
@@ -103,7 +104,7 @@ export default class Arvore {
         node.pai = auxiliar;
     }
 
-    private rotacaoDireita(node: No){
+    rotacaoDireita(node: No){
         console.log('Rotação direita');
         let auxiliar = node.esquerda;
         node.esquerda = auxiliar.direita;
@@ -121,7 +122,14 @@ export default class Arvore {
         node.pai = auxiliar;
     }
 
-    remover() { }
+    
+
+    remover(chave: number ) {
+        let suporte = new Suporte();     
+           
+        suporte.remove(chave);
+
+     }
 
     exibir() {
         this.exibirOrdemAtual(this.raiz);
