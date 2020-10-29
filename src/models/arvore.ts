@@ -223,13 +223,13 @@ export default class Arvore {
                 return;
             y = z;
             let yCor = y.cor;
-            if(z.esquerda === null) {
+            if(z.esquerda === null && z.direita !== null) {
                 x = z.direita;
                 this.rbTransplant(z, z.direita);
-            }else if(z.direita === null){
+            }else if(z.direita === null &&z.esquerda !== null){
                 x = z.esquerda;
                 this.rbTransplant(z, z.esquerda);
-            } else {
+            } else if(z.direita !== null &&z.esquerda !== null){
                 y = this.minimun(z.direita);
                 yCor = y.cor;
                 x = y.direita;
