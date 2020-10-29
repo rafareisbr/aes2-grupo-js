@@ -247,7 +247,7 @@ export default class Arvore {
                 y.esquerda.pai = y;
                 y.cor = z.cor;
             }
-            if(yCor === Cor.Preto){
+            if(yCor === Cor.Preto && x !== null){
                 this.fixDelete(x);
             }
         }
