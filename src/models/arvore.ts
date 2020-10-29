@@ -1,6 +1,5 @@
 import No from "./no";
 import { Cor } from '../Enums/CorEnum';
-import Suporte from "./suporte";
 
 export default class Arvore {
     raiz: No;
@@ -86,7 +85,7 @@ export default class Arvore {
         this.raiz.cor = Cor.Preto;
     }
 
-   rotacaoEsquerda(node: No){
+    private rotacaoEsquerda(node: No){
         console.log(`Rotação esquerda`);
         let auxiliar = node.direita;
         node.direita = auxiliar.esquerda;
@@ -104,7 +103,7 @@ export default class Arvore {
         node.pai = auxiliar;
     }
 
-    rotacaoDireita(node: No){
+    private rotacaoDireita(node: No){
         console.log('Rotação direita');
         let auxiliar = node.esquerda;
         node.esquerda = auxiliar.direita;
@@ -121,19 +120,142 @@ export default class Arvore {
         auxiliar.direita = node;
         node.pai = auxiliar;
     }
-
-    
-
     remover(chave: number) {
-        let suporte = new Suporte();     
-           
-        suporte.remove(this.raiz, chave);
-
-     }
+        this.delete(this.raiz, chave);
+    }
 
     exibir() {
         this.exibirOrdemAtual(this.raiz);
     }
+    private search(node: No, chave: number): No {
+        if(node === null || chave === node.chave)
+            return node;
+        if(chave < node.chave)
+            return this.search(node.esquerda, chave);
+        return this.search(node.direita, chave);
+    }
+    private fixDelete(x: No) {
+        let s: No;
+        while(x !== this.raiz && x.cor === Cor.Preto) {
+            if(x === x.pai.esquerda) {
+                s = x.pai.direita;
+                if(s.cor === Cor.Vermelho){
+                    //case 3.1
+                    s.cor = Cor.Preto;
+                    x.pai.cor = Cor.Vermelho;
+                    this.rotacaoEsquerda(x.pai);
+                    s = x.pai.direita;
+                }
+                if(s.esquerda.cor === Cor.Preto && s.direita.cor === Cor.Preto){
+                    //case 3.2
+                    s.cor = Cor.Vermelho;
+                    x = x.pai;
+                } else {
+                    if(s.direita.cor === Cor.Preto) {
+                        //case 3.3
+                        s.esquerda.cor = Cor.Preto;
+                        s.cor = Cor.Vermelho;
+                        this.rotacaoDireita(s);
+                        s = x.pai.direita;
+                    }
+                    //case 3.4
+                    s.cor = x.pai.cor;
+                    x.pai.cor = Cor.Preto;
+                    s.direita.cor = Cor.Preto;
+                    this.rotacaoEsquerda(x.pai);
+                    x = this.raiz;
+                }
+            } else {
+                s = x.pai.esquerda;
+                if(s.cor === Cor.Vermelho){
+                    //case 3.1
+                    s.cor = Cor.Preto;
+                    x.pai.cor = Cor.Vermelho;
+                    this.rotacaoDireita(x.pai);
+                    s = x.pai.esquerda;
+                }
+                if(s.direita.cor === Cor.Preto && s.esquerda.cor === Cor.Preto){
+                    //case 3.2
+                    s.cor = Cor.Vermelho;
+                    x = x.pai;
+                } else {
+                    if(s.esquerda.cor === Cor.Preto){
+                        //case 3.3
+                        s.direita.cor = Cor.Preto;
+                        s.cor = Cor.Vermelho;
+                        this.rotacaoEsquerda(s);
+                        s = x.pai.esquerda;
+                    }
+                    //case 3.4
+                    s.cor = x.pai.cor;
+                    x.pai.cor = Cor.Preto;
+                    s.esquerda.cor = Cor.Preto;
+                    this.rotacaoDireita(x.pai);
+                    x = this.raiz;
+                }
+            }
+        }
+        x.cor = Cor.Preto;
+    }
+        private rbTransplant(u, v) {
+            if(u.pai === null)
+                this.raiz = v;
+            else if(u === u.pai.esquerda)
+                u.pai.esquerda = v;
+            else
+                u.pai.direita = v;
+            if(v === null)
+                v = new No(null, null, Cor.Preto);
+            v.pai = u.pai;
+        }
+        delete(node: No, chave: number) {
+            let z:No = null;
+            let x: No, y: No;
+            while(node !== null){
+                if(node.chave === chave)
+                    z = node;
+                if(node.chave <= chave)
+                    node = node.direita;
+                else
+                    node = node.esquerda
+            }
+            if(z === null)
+                return;
+            y = z;
+            let yCor = y.cor;
+            if(z.esquerda === null) {
+                x = z.direita;
+                this.rbTransplant(z, z.direita);
+            }else if(z.direita === null){
+                x = z.esquerda;
+                this.rbTransplant(z, z.esquerda);
+            } else {
+                y = this.minimun(z.direita);
+                yCor = y.cor;
+                x = y.direita;
+                if(y.pai === z){
+                    if(x === null)
+                        x = new No(null, null, Cor.Preto);
+                    x.pai = y;
+                }else {
+                    this.rbTransplant(y, y.direita);
+                    y.direita = z.direita;
+                    y.direita.pai = y;
+                }
+                this.rbTransplant(z, y);
+                y.esquerda = z.esquerda;
+                y.esquerda.pai = y;
+                y.cor = z.cor;
+            }
+            if(yCor === Cor.Preto){
+                this.fixDelete(x);
+            }
+        }
+        minimun(node: No) {
+            while(node.esquerda !== null)
+                node = node.esquerda;
+            return node;
+        }
     exibirInOrdem(no: No) {
         if (no !== null) {
             this.exibirInOrdem(no.esquerda);
