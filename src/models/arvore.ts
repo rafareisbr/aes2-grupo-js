@@ -223,13 +223,13 @@ export default class Arvore {
                 return;
             y = z;
             let yCor = y.cor;
-            if(z.esquerda === null && z.direita !== null) {
+            if(z.esquerda === null) {
                 x = z.direita;
                 this.rbTransplant(z, z.direita);
-            }else if(z.direita === null &&z.esquerda !== null){
+            }else if(z.direita === null){
                 x = z.esquerda;
                 this.rbTransplant(z, z.esquerda);
-            } else if(z.direita !== null &&z.esquerda !== null){
+            } else {
                 y = this.minimun(z.direita);
                 yCor = y.cor;
                 x = y.direita;
@@ -247,7 +247,7 @@ export default class Arvore {
                 y.esquerda.pai = y;
                 y.cor = z.cor;
             }
-            if(yCor === Cor.Preto){
+            if(yCor === Cor.Preto && x !== null){
                 this.fixDelete(x);
             }
         }
