@@ -15,7 +15,10 @@ function start() {
     arvore.inserir(22);
     console.log("========inserindo 30 ========");
     arvore.inserir(30);
-    console.log("========  ========");
+    console.log("================");
+    console.log("========removendo 30 ========");
+    console.log("================");
+    arvore.remover(30);
     
     arvore.exibir();
     //exibe o valor e cor da raiz, para verificar se as rotações fora feitas certo
