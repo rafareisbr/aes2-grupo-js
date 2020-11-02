@@ -3,6 +3,8 @@ import { Cor } from '../Enums/CorEnum';
 
 export default class Arvore {
     raiz: No;
+    valoresArvore: Array<number>;
+    alturaBenchmark: number;
 
     constructor() {
         this.raiz = null;
@@ -14,6 +16,7 @@ export default class Arvore {
         let aux: No = null;
 
         while(raiz != null) {
+            this.alturaBenchmark++;
             aux = raiz;
             if(node.chave < raiz.chave)
                 raiz = raiz.esquerda;
@@ -86,7 +89,6 @@ export default class Arvore {
     }
 
     private rotacaoEsquerda(node: No){
-        console.log(`Rotação esquerda`);
         let auxiliar = node.direita;
         node.direita = auxiliar.esquerda;
         if(auxiliar.esquerda !== null)
@@ -104,7 +106,6 @@ export default class Arvore {
     }
 
     private rotacaoDireita(node: No){
-        console.log('Rotação direita');
         let auxiliar = node.esquerda;
         node.esquerda = auxiliar.direita;
         if(auxiliar.direita !== null)
@@ -128,10 +129,13 @@ export default class Arvore {
         this.exibirOrdemAtual(this.raiz);
     }
     private search(node: No, chave: number): No {
-        if(node === null || chave === node.chave)
+        if(node === null || chave === node.chave) {
             return node;
-        if(chave < node.chave)
+        }
+        this.alturaBenchmark++;
+        if(chave < node.chave) {
             return this.search(node.esquerda, chave);
+        }
         return this.search(node.direita, chave);
     }
     private fixDelete(x: No) {
@@ -269,6 +273,52 @@ export default class Arvore {
             console.log(`Valor: ${no.chave} Cor: ${no.cor.toString()} Pai: ${no.pai?no.pai.chave: 'Sem pai'}`);
             this.exibirOrdemAtual(no.esquerda);
             this.exibirOrdemAtual(no.direita)
+        }
+    }
+
+    criaArvore(quantidadeNo: number) {
+        let valorNos = new Array<number>(quantidadeNo);
+        let novoValor = 0;
+        let valorExistente = true;
+        for(let cont = 0; cont < quantidadeNo; cont++) {
+            valorExistente = true;
+            while (valorExistente) {
+                valorExistente = false;
+                novoValor = Math.floor(Math.random()*10000000);
+                if (cont === 0) {
+                    valorNos[cont] = novoValor;
+                } else {
+                    for(let cont2 = 0; cont2 < cont; cont2++) {
+                        if (valorNos[cont2] === novoValor) {
+                            valorExistente = true;
+                        }
+                    }
+                    if (valorExistente === false) {
+                        valorNos[cont] = novoValor;
+                    }
+                }
+            }
+        }
+        for(let cont = 0; cont < quantidadeNo; cont++) {
+            this.inserir(valorNos[cont]);
+        }
+        this.valoresArvore = valorNos;
+    }
+    testaArvore() {
+        let valor = 0;
+        for(let cont = 0; cont < 30; cont ++) {
+            this.alturaBenchmark = 0;
+            this.search(this.raiz, this.valoresArvore[cont]);
+            console.log(`procura ${cont+1}: ${this.alturaBenchmark}`)
+        }
+        for(let cont = 0; cont < 30; cont ++) {
+            this.alturaBenchmark = 0;
+            valor = Math.floor(Math.random()*10000000);
+            this.inserir(valor);
+            console.log(`inserção ${cont+1}: ${this.alturaBenchmark}`)
+        }
+        for(let cont = 0; cont < 30; cont ++) {
+            this.remover(this.valoresArvore[cont+30]);
         }
     }
 }
